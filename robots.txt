@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cash4iphone.net/sitemap.xml
