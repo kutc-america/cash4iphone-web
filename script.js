@@ -72,34 +72,70 @@ const updateOpenBadge = () => {
 
 updateOpenBadge();
 
-// ── CONTACT FORM — INLINE THANK YOU ──
+// ── CONTACT FORM — INLINE THANK YOU + UPLOADCARE SILENT UPLOAD ──
 const contactForm = document.getElementById('contact-form');
 const formSuccess = document.getElementById('form-success');
+
+// Upload a single file to Uploadcare and return its CDN URL
+const uploadToUploadcare = (file, publicKey) => new Promise((resolve, reject) => {
+  const fd = new FormData();
+  fd.append('UPLOADCARE_PUB_KEY', publicKey);
+  fd.append('UPLOADCARE_STORE', '1');
+  fd.append('file', file);
+  fetch('https://upload.uploadcare.com/base/', { method: 'POST', body: fd })
+    .then(r => r.json())
+    .then(data => {
+      if (data.file) resolve('https://ucarecdn.com/' + data.file + '/');
+      else reject(new Error('Uploadcare error: ' + JSON.stringify(data)));
+    })
+    .catch(reject);
+});
+
 if (contactForm && formSuccess) {
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending…';
     btn.disabled = true;
+
     try {
+      // Upload any selected photos to Uploadcare first, collect CDN URLs
+      const ucHidden = document.getElementById('uc-hidden');
+      if (selectedFiles && selectedFiles.length > 0) {
+        const PUBLIC_KEY = '2d82695a61c567d9a897'; // ← replace with your Uploadcare public key
+        const urls = [];
+        for (let i = 0; i < selectedFiles.length; i++) {
+          btn.textContent = 'Uploading photo ' + (i + 1) + ' of ' + selectedFiles.length + '…';
+          const url = await uploadToUploadcare(selectedFiles[i], PUBLIC_KEY);
+          urls.push(url);
+        }
+        // Put all URLs into the hidden field as a readable list
+        ucHidden.value = urls.join(' | ');
+      } else {
+        if (ucHidden) ucHidden.value = '';
+      }
+
+      btn.textContent = 'Sending…';
+
       const res = await fetch(contactForm.action, {
         method: 'POST',
         body: new FormData(contactForm),
         headers: { 'Accept': 'application/json' }
       });
+
       if (res.ok) {
         contactForm.style.display = 'none';
         formSuccess.style.display = 'block';
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        btn.textContent = 'Send Message';
+        btn.textContent = 'Get My Cash Offer →';
         btn.disabled = false;
         alert('Something went wrong. Please try WhatsApp instead.');
       }
-    } catch {
-      btn.textContent = 'Send Message';
+    } catch (err) {
+      console.error(err);
+      btn.textContent = 'Get My Cash Offer →';
       btn.disabled = false;
-      alert('Something went wrong. Please try WhatsApp instead.');
+      alert('Something went wrong uploading your photos. Please try WhatsApp instead.');
     }
   });
 }
@@ -150,7 +186,6 @@ const uploadPreview = document.getElementById('upload-preview');
 
 if (uploadArea && uploadInput) {
   const MAX_FILES = 5;
-  let selectedFiles = [];
 
   const renderPreviews = () => {
     uploadPreview.innerHTML = '';

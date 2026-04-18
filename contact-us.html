@@ -16,12 +16,12 @@
     <div class="logo-text">Cash4iPhone</div>
   </a>
   <nav>
-    <a href="/">Home</a><a href="/about">About</a><a href="/products">Products</a><a href="/prices">Prices</a><a href="/contact-us" class="cta-nav">Contact Us</a>
+    <a href="/">Home</a><a href="/about">About</a><a href="/products">Products</a><a href="#faq">FAQ</a><a href="/contact-us" class="cta-nav">Contact Us</a>
   </nav>
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 <div class="mobile-menu">
-  <a href="/">Home</a><a href="/about">About</a><a href="/products">Products</a><a href="/prices">Prices</a><a href="/contact-us" class="cta-nav">Contact Us</a>
+  <a href="/">Home</a><a href="/about">About</a><a href="/products">Products</a><a href="#faq">FAQ</a><a href="/contact-us" class="cta-nav">Contact Us</a>
 </div>
 
 <main>
@@ -70,7 +70,7 @@
           <div class="section-label label-blue" style="margin-bottom:20px;">Send a Message</div>
           <h2 class="section-title" style="margin-bottom:32px;">Get a <em>cash offer</em> fast.</h2>
           <div id="form-success" style="display:none;text-align:center;padding:48px 24px;"><div style="font-size:3rem;margin-bottom:16px;">✅</div><h3 style="font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:12px;">Thank you!</h3><p style="color:var(--text-muted);font-size:15px;font-weight:500;">We have received your message and will get back to you shortly via WhatsApp or email.</p><a href="http://wa.me/19173103999" target="_blank" class="btn btn-green" style="margin-top:28px;">Chat on WhatsApp</a></div>
-          <form id="contact-form" action="https://formspree.io/f/xqewakwp" method="POST" enctype="multipart/form-data">
+          <form id="contact-form" action="https://formspree.io/f/xqewakwp" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="fname">First Name</label>
@@ -117,17 +117,25 @@
 
             <div class="form-group">
               <label>Photos of Your Device <span class="field-hint">optional — up to 5 images</span></label>
+
+              <!-- Uploadcare hidden input — populated by JS after upload, sent to Formspree as a URL -->
+              <input type="hidden" name="photos" id="uc-hidden"/>
+
+              <!-- Our custom upload UI -->
               <div class="upload-area" id="upload-area">
-                <input type="file" id="photos" name="photos" accept="image/*" multiple class="upload-input"/>
+                <input type="file" id="photos-input" accept="image/*" multiple class="upload-input"/>
                 <div class="upload-body" id="upload-body">
-                  <div class="upload-icon">📷</div>
+                  <div class="upload-icon" style="color:var(--text-muted);">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  </div>
                   <p class="upload-title">Tap to upload photos</p>
                   <p class="upload-sub">Front, back, screen, any damage — JPG, PNG, HEIC up to 10MB each</p>
                 </div>
                 <div class="upload-preview" id="upload-preview"></div>
+                <div class="upload-count" id="upload-count"></div>
               </div>
-            </div>
 
+            </div>
             <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Get My Cash Offer →</button>
           </form>
         </div>
@@ -136,6 +144,67 @@
   </section>
 </main>
 
+<!-- FAQ Section -->
+<div class="section-inner" style="padding-bottom:60px;">
+  <div class="text-block">
+  <div id="faq" class="faq-section reveal">
+    <div class="section-label label-purple">FAQ</div>
+    <h2 class="section-title reveal-delay-1">Common <em>Questions</em></h2>
+    <div class="card card--soft faq-intro">
+      <div class="faq-intro-top">
+        <div class="section-label label-green">Hours</div>
+        <span>Available 7 days a week, Monday through Sunday, 10am–8pm Eastern Time.</span>
+      </div>
+      <p>We are available every day during those hours for WhatsApp messages and contact form replies.</p>
+      <p>If you reach out outside of these times, we will respond as soon as we are back online.</p>
+    </div>
+    <div class="faq-accordion">
+      <div class="faq-item open">
+        <button class="faq-question">
+          <span>Do you have a store I can visit?</span>
+          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer"><p>We don't operate a traditional store — we meet you in person at a public location of your choice anywhere in Queens or New York. You can also come to us in the Woodside / Sunnyside Queens area.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Do you buy locked, carrier-locked or financed iPhones?</span>
+          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer"><p>Yes! We buy carrier-locked iPhones, locked and financed iPhones that other buyers won't touch. For financed devices — we can buy them, but paying the remaining monthly installments to the carrier remains your responsibility. Contact us via WhatsApp for a quote.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>How fast do I get paid?</span>
+          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer"><p>Instantly — cash in hand the moment we meet and inspect your device. No waiting, no bank transfers, no delays.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Where do we meet?</span>
+          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer"><p>Anywhere safe and public works — a bank lobby, McDonald's, Starbucks, or any spot in Queens, Sunnyside, or New York City. We come to you.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What price can I get for my used iPhone?</span>
+          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer"><p>For used phones we give an approximate price based on model, condition, and storage. For brand new unused phones we can give you an exact price. WhatsApp us with your device details for a fast quote.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Do I need any paperwork to sell my device?</span>
+          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer"><p>No paperwork or ID needed — just make sure it's your own device.</p></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
 <a class="wa-fab" href="http://wa.me/19173103999" target="_blank" rel="noopener">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   WhatsApp
@@ -144,7 +213,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand"><a href="/" class="logo"><div class="logo-mark">C4i</div><div class="logo-text">Cash4iPhone</div></a><p>Queens' #1 iPhone buyer. We buy used iPhones, carrier-locked iPhones, and locked iPhones in Sunnyside, Woodside &amp; all of New York.</p></div>
-      <div class="footer-col"><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/products">Products</a></li><li><a href="/prices">Prices</a></li><li><a href="/contact-us">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/products">Products</a></li><li><a href="#faq">FAQ</a></li><li><a href="/contact-us">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Contact</h4><ul><li><a href="http://wa.me/19173103999">WhatsApp: +1 (917) 310-3999</a></li><li><a href="/contact-us">Send a Message</a></li><li><a>Woodside / Sunnyside, Queens NY</a></li><li><a>We meet you — bank, McDonald's, anywhere</a></li></ul></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Cash4iPhone</span><span>Woodside, New York · U.S.A.</span></div>
