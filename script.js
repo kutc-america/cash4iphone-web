@@ -169,7 +169,7 @@ if (contactForm && formSuccess) {
       // Upload photos to Uploadcare silently, then put CDN URLs in hidden field
       const ucHidden = document.getElementById('uc-hidden');
       if (selectedFiles && selectedFiles.length > 0) {
-        const PUBLIC_KEY = 'demopublickey'; // ← replace with your Uploadcare public key
+        const PUBLIC_KEY = '2d82695a61c567d9a897'; // ← replace with your Uploadcare public key
         const urls = [];
         for (let i = 0; i < selectedFiles.length; i++) {
           btn.textContent = 'Uploading photo ' + (i + 1) + ' of ' + selectedFiles.length + '…';
