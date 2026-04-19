@@ -69,9 +69,8 @@ const updateOpenBadge = () => {
 updateOpenBadge();
 
 // ── IMAGE UPLOAD PREVIEW ──
-// Declared at top level so the form submit handler can access selectedFiles
 const uploadArea    = document.getElementById('upload-area');
-const uploadInput   = document.getElementById('photos-input');  // matches id in contact-us.html
+const uploadInput   = document.getElementById('photos-input');
 const uploadBody    = document.getElementById('upload-body');
 const uploadPreview = document.getElementById('upload-preview');
 const uploadCountEl = document.getElementById('upload-count');
@@ -141,23 +140,25 @@ if (uploadArea && uploadInput) {
   });
 }
 
-// ── CONTACT FORM — INLINE THANK YOU + UPLOADCARE SILENT UPLOAD ──
+// ── CONTACT FORM — INLINE THANK YOU ──
+// Photos are attempted via Uploadcare; if that fails, form still submits without them.
 const contactForm = document.getElementById('contact-form');
 const formSuccess  = document.getElementById('form-success');
 
-const uploadToUploadcare = (file, publicKey) => new Promise((resolve, reject) => {
-  const fd = new FormData();
-  fd.append('UPLOADCARE_PUB_KEY', publicKey);
-  fd.append('UPLOADCARE_STORE', '1');
-  fd.append('file', file);
-  fetch('https://upload.uploadcare.com/base/', { method: 'POST', body: fd })
-    .then(r => r.json())
-    .then(data => {
-      if (data.file) resolve('https://ucarecdn.com/' + data.file + '/');
-      else reject(new Error('Uploadcare error: ' + JSON.stringify(data)));
-    })
-    .catch(reject);
-});
+// Try to upload one file to Uploadcare. Returns a CDN URL string, or null on failure.
+const tryUploadToUploadcare = async (file, publicKey) => {
+  try {
+    const fd = new FormData();
+    fd.append('UPLOADCARE_PUB_KEY', publicKey);
+    fd.append('UPLOADCARE_STORE', '1');
+    fd.append('file', file);
+    const r = await fetch('https://upload.uploadcare.com/base/', { method: 'POST', body: fd });
+    const data = await r.json();
+    return data.file ? 'https://ucarecdn.com/' + data.file + '/' : null;
+  } catch {
+    return null; // silently skip this photo
+  }
+};
 
 if (contactForm && formSuccess) {
   contactForm.addEventListener('submit', async (e) => {
@@ -166,43 +167,52 @@ if (contactForm && formSuccess) {
     btn.disabled = true;
 
     try {
-      // Upload photos to Uploadcare silently, then put CDN URLs in hidden field
       const ucHidden = document.getElementById('uc-hidden');
+
+      // ── PHOTO UPLOAD (best-effort — never blocks form submission) ──
       if (selectedFiles && selectedFiles.length > 0) {
-        const PUBLIC_KEY = '2d82695a61c567d9a897'; // ← replace with your Uploadcare public key
+        const PUBLIC_KEY = '2d82695a61c567d9a897'; // your Uploadcare public key
         const urls = [];
         for (let i = 0; i < selectedFiles.length; i++) {
           btn.textContent = 'Uploading photo ' + (i + 1) + ' of ' + selectedFiles.length + '…';
-          const url = await uploadToUploadcare(selectedFiles[i], PUBLIC_KEY);
-          urls.push(url);
+          const url = await tryUploadToUploadcare(selectedFiles[i], PUBLIC_KEY);
+          if (url) urls.push(url);
         }
-        if (ucHidden) ucHidden.value = urls.join(' | ');
+        if (ucHidden) ucHidden.value = urls.length > 0 ? urls.join(' | ') : '';
       } else {
         if (ucHidden) ucHidden.value = '';
       }
 
       btn.textContent = 'Sending…';
 
+      // ── FORMSPREE SUBMISSION ──
       const res = await fetch(contactForm.action, {
         method: 'POST',
         body: new FormData(contactForm),
         headers: { 'Accept': 'application/json' }
       });
 
+      // Formspree returns 200 on success
       if (res.ok) {
         contactForm.style.display = 'none';
         formSuccess.style.display = 'block';
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
+        // Parse Formspree error if available
+        let msg = 'Something went wrong sending your message. Please try WhatsApp instead.';
+        try {
+          const json = await res.json();
+          if (json && json.errors) msg = json.errors.map(err => err.message).join(', ');
+        } catch {}
         btn.textContent = 'Get My Cash Offer →';
         btn.disabled = false;
-        alert('Something went wrong. Please try WhatsApp instead.');
+        alert(msg);
       }
     } catch (err) {
-      console.error(err);
+      console.error('Form submission error:', err);
       btn.textContent = 'Get My Cash Offer →';
       btn.disabled = false;
-      alert('Something went wrong. Please try WhatsApp instead.');
+      alert('Network error. Please check your connection or try WhatsApp instead.');
     }
   });
 }

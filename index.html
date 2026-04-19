@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Cash4iPhone — Sell Your iPhone for Cash in Queens, NY | Top iPhone Buyer NYC</title>
+  <title>Cash4iPhone — Sell Your iPhone for Cash in Queens, NY | #1 iPhone Buyer NYC</title>
   <meta name="description" content="Cash4iPhone — the fastest way to sell your iPhone for cash in Queens, Sunnyside &amp; New York City. We pay top dollar for used, locked &amp; carrier-locked iPhones. Instant cash, no hassle. WhatsApp us now!"/>
   <meta name="keywords" content="Cash4iPhone, cash for iPhone Queens NY, sell iPhone for cash New York, iPhone buyer Queens NY, iPhone buyer Sunnyside Queens, used iPhone buyer New York, sell my iPhone for cash, locked iPhone buyer Queens, carrier locked iPhone buyer NYC, best price for iPhone Queens, cash for iPhones NYC, where to sell iPhone for cash Queens, sell iPhone same day cash, cash4iphone.net, iPhone cash buyer near me New York"/>
   <link rel="canonical" href="https://cash4iphone.net/"/>
@@ -48,9 +48,9 @@
     ],
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
       "opens": "10:00",
-      "closes": "19:00"
+      "closes": "20:00"
     },
     "priceRange": "$$",
     "sameAs": ["https://wa.me/19173103999"],
@@ -68,6 +68,184 @@
   </script>
 
   <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    /* ── APPLE-STYLE HERO ── */
+    .hero-apple {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      /* Dark gradient that matches site bg — the image will blend into this */
+      background: linear-gradient(180deg, #000 0%, #060d1e 60%, #0a1628 100%);
+      padding-top: calc(var(--nav-h) + 52px);
+    }
+
+    /* Top text block */
+    .hero-apple-text {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-apple-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .hero-apple-eyebrow .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse-g 2s infinite;
+      flex-shrink: 0;
+    }
+
+    .hero-apple-headline {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6.5vw, 5.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.036em;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .hero-apple-sub {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1rem, 2.4vw, 1.45rem);
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 34px;
+      line-height: 1.4;
+    }
+
+    .hero-apple-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+
+    .btn-apple-primary {
+      background: var(--grad-blue);
+      color: #fff;
+      padding: 13px 32px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.28s;
+      box-shadow: 0 6px 24px rgba(59,130,246,0.45);
+    }
+    .btn-apple-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(59,130,246,0.58); }
+
+    .btn-apple-ghost {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      padding: 13px 32px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.28s;
+      backdrop-filter: blur(8px);
+    }
+    .btn-apple-ghost:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
+
+    /* ── PHONE IMAGE WRAPPER ── */
+    .hero-apple-phones {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      margin-top: -10px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-apple-phones img {
+      width: 100%;
+      max-width: 1140px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      /* Fade bottom edge smoothly into site background */
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 95%);
+      mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 95%);
+      /* Subtle blue glow reflected under phones */
+      filter: drop-shadow(0 24px 60px rgba(79,158,255,0.18));
+    }
+
+    /* Subtle blue glow under phones */
+    .hero-apple-phones::after {
+      content: '';
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(79,158,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Trust pills */
+    .hero-pills {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 0 20px 56px;
+      margin-top: -50px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(6px);
+    }
+
+    @media (max-width: 768px) {
+      .hero-apple { min-height: auto; padding-top: calc(var(--nav-h) + 36px); }
+      .hero-apple-phones { margin-top: -10px; }
+      .hero-pills { margin-top: -40px; padding-bottom: 40px; }
+      .btn-apple-primary, .btn-apple-ghost { font-size: 14px; padding: 12px 24px; }
+    }
+  </style>
 </head>
 
   <body>
@@ -96,43 +274,37 @@
 
 <main>
 
-<section class="hero">
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
-  <div class="hero-blob hero-blob-3"></div>
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge reveal">
-        <div class="hero-badge-dot"></div>
-        <span>Queens, NY · Open Now</span>
-      </div>
-    <h1 class="display-title reveal reveal-delay-1">
-       Top iPhone Buyer in Queens, NY<br>
-       <em>Sell Your iPhone For Cash — Best Price Guaranteed</em>
-    </h1>
-      <p class="section-subtitle reveal reveal-delay-2">
-        Cash4iPhone — Queens' most trusted iPhone buyer. We buy <strong>used iPhones</strong>, <strong>carrier-locked iPhones</strong>, and <strong>locked iPhones</strong> in Sunnyside, Woodside, and all of New York. Fast payment, fair prices, zero hassle. We <strong>pay cash for iPhones</strong> on the spot — no waiting, no checks. <strong>Wondering where to sell your new or used iPhone for cash in Queens, New York?</strong> You found us.
-      </p>
-      <div class="hero-cta reveal reveal-delay-3">
-        <a href="/contact-us" class="btn btn-primary">Contact Us</a>
-        <a href="/products" class="btn btn-outline">View Products</a>
-      </div>
-      <p class="hero-secondary">🔒 No store needed &nbsp;·&nbsp; 📍 We come to you &nbsp;·&nbsp; 💵 Cash on the spot</p>
+<!-- ══ APPLE-STYLE HERO ══ -->
+<section class="hero-apple">
+  <!-- Text above phones -->
+  <div class="hero-apple-text reveal">
+    <div class="hero-apple-eyebrow">
+      <span class="dot"></span>
+      <span id="hero-badge-text">Queens, NY · Open Now</span>
     </div>
-    <div class="hero-mosaic reveal reveal-delay-2">
-      <div class="mosaic-card large blue-bg">
-        <img src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone-17-pro-17-pro-max-hero.png" alt="iPhone 17 Pro" loading="lazy"/>
-        <div class="mosaic-label">iPhone 17 Pro</div>
-      </div>
-      <div class="mosaic-card purple-bg">
-        <img src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/macbook-pro-16-inch-m5-pro-m5-max.png" alt="MacBook Pro" loading="lazy"/>
-        <div class="mosaic-label">MacBook Pro</div>
-      </div>
-      <div class="mosaic-card green-bg">
-        <img src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/ipad-pro-13-inch-m5.png" alt="iPad Pro" loading="lazy"/>
-        <div class="mosaic-label">iPad Pro</div>
-      </div>
+    <h1 class="hero-apple-headline">#1 iPhone Buyer<br>in Queens, NY</h1>
+    <p class="hero-apple-sub">Sell Your iPhone for Cash — Best Price Guaranteed</p>
+    <div class="hero-apple-cta">
+      <a href="/contact-us" class="btn-apple-primary">Get a Cash Offer</a>
+      <a href="http://wa.me/19173103999" target="_blank" rel="noopener" class="btn-apple-ghost">WhatsApp Us</a>
     </div>
+  </div>
+
+  <!-- Full-width iPhone lineup — transparent background PNG -->
+  <div class="hero-apple-phones reveal reveal-delay-1">
+    <img
+      src="assets/images/iphone-hero.png"
+      alt="Sell your iPhone for cash — Cash4iPhone Queens NY"
+      loading="eager"
+    />
+  </div>
+
+  <!-- Trust pills -->
+  <div class="hero-pills reveal reveal-delay-2">
+    <span class="hero-pill">💵 Cash on the spot</span>
+    <span class="hero-pill">🔒 Locked iPhones welcome</span>
+    <span class="hero-pill">📍 We come to you</span>
+    <span class="hero-pill">⚡ No waiting</span>
   </div>
 </section>
 
@@ -211,7 +383,7 @@
         <div class="section-label label-purple reveal">What We Do</div>
         <h2 class="section-title reveal reveal-delay-1">Sell Your iPhone in Queens.<br><em>We Pay the Best.</em></h2>
       </div>
-      <p class="section-subtitle reveal">Whether you want to sell a used iPhone, a carrier-locked iPhone, or even an locked iPhone — Cash4iPhone in Sunnyside Queens gives you the best price in New York. Walk in or message us on WhatsApp.</p>
+      <p class="section-subtitle reveal">Whether you want to sell a used iPhone, a carrier-locked iPhone, or even a locked iPhone — Cash4iPhone in Sunnyside Queens gives you the best price in New York. Walk in or message us on WhatsApp.</p>
     </div>
     <div class="services-grid">
       <div class="card service-card reveal">
