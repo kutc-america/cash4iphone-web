@@ -252,8 +252,8 @@ h2.section-title em{font-style:normal;background:var(--grad-blue);-webkit-backgr
 /* TAGS */
 .tag-blue{background:var(--blue-mid);color:var(--blue);}
 .tag-purple{background:var(--purple-mid);color:var(--purple);}
-.tag-green{background:var(--green-mid);color:#065f46;}
-.tag-orange{background:var(--orange-mid);color:#92400e;}
+.tag-green{background:var(--green-mid);color:#00ffb7;}
+.tag-orange{background:var(--orange-mid);color:#ff6200;}
 .tag-pink{background:var(--pink-mid);color:var(--pink);}
 .tag-teal{background:#ccfbf1;color:var(--teal);}
 
