@@ -255,7 +255,7 @@ h2.section-title em{font-style:normal;background:var(--grad-blue);-webkit-backgr
 .tag-green{background:var(--green-mid);color:#00ffb7;}
 .tag-orange{background:var(--orange-mid);color:#ff6200;}
 .tag-pink{background:var(--pink-mid);color:var(--pink);}
-.tag-teal{background:#ccfbf1;color:var(--teal);}
+.tag-teal{background:#004435;color:var(--teal);}
 
 /* PRICES */
 .price-category{margin-bottom:64px;}
