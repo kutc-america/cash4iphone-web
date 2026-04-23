@@ -46,10 +46,11 @@ document.querySelectorAll('nav a, .mobile-menu a').forEach(a => {
 
 // ── OPEN/CLOSED BADGE ──
 const updateOpenBadge = () => {
-  const badge = document.querySelector('.hero-badge');
-  if (!badge) return;
-  const label = badge.querySelector('span');
-  if (!label) return;
+  // Supports both old (.hero-badge) and new Apple-style hero (.hero-apple-eyebrow)
+  const dot = document.querySelector('.hero-apple-eyebrow .dot, .hero-badge-dot');
+  const label = document.getElementById('hero-badge-text') || document.querySelector('.hero-badge span');
+  if (!dot && !label) return;
+
   let estHour = new Date().getHours();
   try {
     const parts = new Intl.DateTimeFormat('en-US', {
@@ -60,12 +61,29 @@ const updateOpenBadge = () => {
     const hourPart = parts.find(part => part.type === 'hour');
     if (hourPart) estHour = Number(hourPart.value);
   } catch (e) {}
+
   const isOpen = estHour >= 10 && estHour < 20;
-  badge.classList.toggle('open', isOpen);
-  badge.classList.toggle('closed', !isOpen);
-  label.textContent = isOpen
-    ? 'QUEENS, NY · Open Now'
-    : "QUEENS, NY · Closed — contact us, we'll respond as soon as we can";
+
+  // Update dot color
+  if (dot) {
+    dot.style.background = isOpen ? 'var(--green, #34d399)' : '#f87171';
+    dot.style.animation = isOpen ? '' : 'none';
+    dot.style.boxShadow = isOpen ? '' : 'none';
+  }
+
+  // Update text
+  if (label) {
+    label.textContent = isOpen
+      ? 'QUEENS, NY · Open Now'
+      : 'QUEENS, NY · Closed · We reply as soon as we\'re back';
+  }
+
+  // Also handle old-style badge if present
+  const oldBadge = document.querySelector('.hero-badge');
+  if (oldBadge) {
+    oldBadge.classList.toggle('open', isOpen);
+    oldBadge.classList.toggle('closed', !isOpen);
+  }
 };
 updateOpenBadge();
 

@@ -70,61 +70,64 @@
   <link rel="stylesheet" href="style.css"/>
 
   <style>
-    /* ══ APPLE-STYLE HERO — exact Apple.com layout ══
-       Text centered on top, phones image below filling width,
-       cropped at bottom by overflow:hidden. No background tricks. */
+    /* ══ APPLE-STYLE HERO ══ */
+    main { padding-top: 0; }
+
+    header {
+      background: rgba(0,0,0,0.72) !important;
+      border-color: rgba(255,255,255,0.08) !important;
+    }
 
     .hero-apple {
       width: 100%;
-      min-height: 100svh;
       background: #000;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow: hidden;
-      /* Fade bottom into site dark bg */
-      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
+      /* Fade bottom into site bg */
+      -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     }
 
-    /* ── Text block ── */
+    /* ── Text block — top, centered ── */
     .hero-apple-text {
       position: relative;
-      z-index: 10;
+      z-index: 2;
       text-align: center;
-      padding: calc(var(--nav-h) + 52px) 24px 36px;
+      padding: calc(var(--nav-h) + 64px) 24px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-shrink: 0;
+      width: 100%;
     }
 
     .hero-apple-eyebrow {
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.55);
       margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
     .hero-apple-eyebrow .dot {
-      width: 7px;
-      height: 7px;
+      width: 7px; height: 7px;
       border-radius: 50%;
+      /* Default green (open) — JS overrides to red when closed */
       background: var(--green);
       animation: pulse-g 2s infinite;
       flex-shrink: 0;
+      transition: background 0.3s;
     }
 
     .hero-apple-headline {
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.6rem, 6vw, 5rem);
-      line-height: 1.06;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 1.05;
       letter-spacing: -0.034em;
       color: #fff;
       margin-bottom: 12px;
@@ -133,9 +136,9 @@
     .hero-apple-sub {
       font-family: 'Outfit', sans-serif;
       font-weight: 500;
-      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
       color: rgba(255,255,255,0.55);
-      margin-bottom: 30px;
+      margin-bottom: 28px;
       line-height: 1.5;
     }
 
@@ -174,34 +177,51 @@
     }
     .btn-apple-ghost:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
 
-    /* ── Phone image — full width, contain, bottom-anchored ── */
+    /* ── Phone image ──
+       Scale image to 200% width so phones fill the viewport.
+       left: -50% re-centers it (image center = screen center).
+       position absolute + bottom:0 hides the black top padding. */
     .hero-apple-phones {
-      width: 100%;
+      width: 135%;
+      height: 62vh;
+      min-height: 420px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      margin-top: -24px;
       flex-shrink: 0;
-      display: flex;
-      justify-content: center;
-      /* Pull image up so it overlaps less empty space at top */
-      margin-top: -20px;
     }
 
     .hero-apple-phones img {
-      /* contain keeps full phone group visible without cropping sides */
-      width: 100%;
-      max-width: 1400px;
-      height: auto;
       display: block;
-      object-fit: contain;
+      width: 200%;
+      height: auto;
+      position: absolute;
+      bottom: 0;
+      left: -50%;
     }
 
-    /* ── Trust pills sit below image ── */
+    /* Mobile — scale even more since viewport is narrower */
+    @media (max-width: 768px) {
+      .hero-apple-phones { height: 55vh; min-height: 320px; }
+      .hero-apple-phones img { width: 320%; left: -110%; }
+    }
+    @media (max-width: 480px) {
+      .hero-apple-phones { height: 50vh; min-height: 280px; }
+      .hero-apple-phones img { width: 380%; left: -140%; }
+    }
+
+    /* ── Trust pills ── */
     .hero-pills {
+      position: relative;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      padding: 20px 20px 48px;
-      flex-shrink: 0;
+      padding: 16px 20px 48px;
+      width: 100%;
     }
 
     .hero-pill {
@@ -209,31 +229,48 @@
       align-items: center;
       gap: 6px;
       padding: 7px 16px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 100px;
       font-size: 12px;
       font-weight: 700;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.7);
       letter-spacing: 0.04em;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
     }
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
-      .hero-apple-text { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 24px; }
-      .hero-apple-headline { font-size: clamp(2rem, 8vw, 2.8rem); }
-      .hero-apple-sub { font-size: 1rem; }
+      .hero-apple-text { padding-top: calc(var(--nav-h) + 36px); padding-bottom: 12px; }
+      .hero-apple-headline { font-size: clamp(2rem, 9vw, 2.8rem); }
+      .hero-apple-sub { font-size: 1rem; margin-bottom: 16px; }
       .btn-apple-primary, .btn-apple-ghost { font-size: 14px; padding: 11px 22px; }
-      .hero-apple-phones { margin-top: -10px; }
       .hero-pills { padding: 12px 16px 36px; gap: 8px; }
       .hero-pill { font-size: 11px; padding: 6px 12px; }
     }
 
     @media (max-width: 480px) {
-      .hero-apple-cta { flex-direction: column; align-items: center; }
-      .btn-apple-primary, .btn-apple-ghost { width: 200px; justify-content: center; text-align: center; }
+      .hero-apple-cta { flex-direction: column; align-items: stretch; max-width: 220px; }
+      .btn-apple-primary, .btn-apple-ghost { text-align: center; justify-content: center; }
     }
+  </style>
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png"/>
+  <link rel="manifest" href="assets/images/site.webmanifest"/>
+  <style>
+    /* Logo image replaces old C4i text mark */
+    .logo-img {
+      height: 36px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    /* Remove old logo-mark/logo-text styling conflicts */
+    header .logo, footer .logo { gap: 0; }
+    @media (max-width: 768px) { .logo-img { height: 28px; } }
   </style>
 </head>
 
@@ -241,8 +278,7 @@
 
 <header>
   <a href="/" class="logo">
-    <div class="logo-mark">C4i</div>
-    <div class="logo-text">Cash4iPhone</div>
+    <img src="assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-img"/>
   </a>
   <nav>
     <a href="/">Home</a>
@@ -283,7 +319,7 @@
   <!-- Phones image below, full width -->
   <div class="hero-apple-phones reveal reveal-delay-1">
     <img
-      src="assets/images/iphone-hero.png"
+      src="assets/images/iphoneblackbackground_largetallx2.jpg"
       alt="Sell your iPhone for cash — Cash4iPhone Queens NY"
       loading="eager"
     />
@@ -513,7 +549,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand"><a href="/" class="logo"><div class="logo-mark">C4i</div><div class="logo-text">Cash4iPhone</div></a><p>Queens' #1 iPhone buyer. We buy used iPhones, carrier-locked iPhones, and locked iPhones in Sunnyside, Woodside &amp; all of New York.</p></div>
+      <div class="footer-brand"><a href="/" class="logo"><img src="assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-img"/></a><p>Queens' #1 iPhone buyer. We buy used iPhones, carrier-locked iPhones, and locked iPhones in Sunnyside, Woodside &amp; all of New York.</p></div>
       <div class="footer-col"><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/products">Products</a></li><li><a href="#faq">FAQ</a></li><li><a href="/contact-us">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Contact</h4><ul><li><a href="http://wa.me/19173103999">WhatsApp: +1 (917) 310-3999</a></li><li><a href="/contact-us">Send a Message</a></li><li><a>Woodside / Sunnyside, Queens NY</a></li><li><a>We meet you — bank, McDonald's, anywhere</a></li></ul></div>
     </div>
