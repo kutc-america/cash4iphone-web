@@ -49,6 +49,7 @@ const updateOpenBadge = () => {
   const badge = document.querySelector('.hero-badge');
   if (!badge) return;
   const label = badge.querySelector('span');
+  if (!label) return;
   let estHour = new Date().getHours();
   try {
     const parts = new Intl.DateTimeFormat('en-US', {
@@ -58,7 +59,7 @@ const updateOpenBadge = () => {
     }).formatToParts(new Date());
     const hourPart = parts.find(part => part.type === 'hour');
     if (hourPart) estHour = Number(hourPart.value);
-  } catch (error) {}
+  } catch (e) {}
   const isOpen = estHour >= 10 && estHour < 20;
   badge.classList.toggle('open', isOpen);
   badge.classList.toggle('closed', !isOpen);
@@ -74,13 +75,13 @@ const uploadInput   = document.getElementById('photos-input');
 const uploadBody    = document.getElementById('upload-body');
 const uploadPreview = document.getElementById('upload-preview');
 const uploadCountEl = document.getElementById('upload-count');
-
 let selectedFiles = [];
 
 if (uploadArea && uploadInput) {
   const MAX_FILES = 5;
 
   const renderPreviews = () => {
+    if (!uploadPreview) return;
     uploadPreview.innerHTML = '';
     selectedFiles.forEach((file, i) => {
       const reader = new FileReader();
@@ -107,9 +108,11 @@ if (uploadArea && uploadInput) {
   };
 
   const syncInput = () => {
-    const dt = new DataTransfer();
-    selectedFiles.forEach(f => dt.items.add(f));
-    uploadInput.files = dt.files;
+    try {
+      const dt = new DataTransfer();
+      selectedFiles.forEach(f => dt.items.add(f));
+      uploadInput.files = dt.files;
+    } catch(e) {}
   };
 
   const updateUploadUI = () => {
@@ -128,7 +131,7 @@ if (uploadArea && uploadInput) {
     renderPreviews();
   });
 
-  uploadArea.addEventListener('dragover',  e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
   uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
   uploadArea.addEventListener('drop', e => {
     e.preventDefault();
@@ -140,12 +143,10 @@ if (uploadArea && uploadInput) {
   });
 }
 
-// ── CONTACT FORM — INLINE THANK YOU ──
-// Photos are attempted via Uploadcare; if that fails, form still submits without them.
+// ── CONTACT FORM — UPLOADCARE PHOTOS + FORMSPREE SUBMISSION ──
 const contactForm = document.getElementById('contact-form');
 const formSuccess  = document.getElementById('form-success');
 
-// Try to upload one file to Uploadcare. Returns a CDN URL string, or null on failure.
 const tryUploadToUploadcare = async (file, publicKey) => {
   try {
     const fd = new FormData();
@@ -156,63 +157,69 @@ const tryUploadToUploadcare = async (file, publicKey) => {
     const data = await r.json();
     return data.file ? 'https://ucarecdn.com/' + data.file + '/' : null;
   } catch {
-    return null; // silently skip this photo
+    return null;
   }
 };
 
 if (contactForm && formSuccess) {
-  contactForm.addEventListener('submit', async (e) => {
+  contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
+
     const btn = contactForm.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
     btn.disabled = true;
 
     try {
+      // ── 1. Upload photos to Uploadcare (best-effort, never blocks submission) ──
       const ucHidden = document.getElementById('uc-hidden');
-
-      // ── PHOTO UPLOAD (best-effort — never blocks form submission) ──
       if (selectedFiles && selectedFiles.length > 0) {
-        const PUBLIC_KEY = '2d82695a61c567d9a897'; // your Uploadcare public key
+        const PUBLIC_KEY = '2d82695a61c567d9a897';
         const urls = [];
         for (let i = 0; i < selectedFiles.length; i++) {
           btn.textContent = 'Uploading photo ' + (i + 1) + ' of ' + selectedFiles.length + '…';
           const url = await tryUploadToUploadcare(selectedFiles[i], PUBLIC_KEY);
           if (url) urls.push(url);
         }
-        if (ucHidden) ucHidden.value = urls.length > 0 ? urls.join(' | ') : '';
+        if (ucHidden) ucHidden.value = urls.join(' | ');
       } else {
         if (ucHidden) ucHidden.value = '';
       }
 
       btn.textContent = 'Sending…';
 
-      // ── FORMSPREE SUBMISSION ──
+      // ── 2. Submit via FormData exactly as Formspree's AJAX guide specifies ──
+      // IMPORTANT: Do NOT set Content-Type manually — browser sets multipart boundary automatically
       const res = await fetch(contactForm.action, {
         method: 'POST',
         body: new FormData(contactForm),
         headers: { 'Accept': 'application/json' }
       });
 
-      // Formspree returns 200 on success
+      const json = await res.json();
+
       if (res.ok) {
         contactForm.style.display = 'none';
         formSuccess.style.display = 'block';
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        // Parse Formspree error if available
-        let msg = 'Something went wrong sending your message. Please try WhatsApp instead.';
-        try {
-          const json = await res.json();
-          if (json && json.errors) msg = json.errors.map(err => err.message).join(', ');
-        } catch {}
-        btn.textContent = 'Get My Cash Offer →';
+        // Show Formspree's actual error so we know exactly what's wrong
+        let errMsg = 'Status ' + res.status + ': ';
+        if (json.errors && json.errors.length) {
+          errMsg += json.errors.map(function(err) { return err.field ? err.field + ' — ' + err.message : err.message; }).join('. ');
+        } else if (json.error) {
+          errMsg += json.error;
+        } else {
+          errMsg += JSON.stringify(json);
+        }
+        alert('Formspree error: ' + errMsg);
         btn.disabled = false;
-        alert(msg);
+        btn.textContent = originalText;
       }
     } catch (err) {
-      console.error('Form submission error:', err);
-      btn.textContent = 'Get My Cash Offer →';
+      console.error('Submission error:', err);
+      alert('Network error: ' + err.message);
       btn.disabled = false;
-      alert('Network error. Please check your connection or try WhatsApp instead.');
+      btn.textContent = originalText;
     }
   });
 }
