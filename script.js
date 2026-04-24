@@ -11,67 +11,61 @@ const observer = new IntersectionObserver((entries) => {
 revealEls.forEach(el => observer.observe(el));
 
 // ── NAVBAR ADAPTIVE COLOR ──
-// Detects which section is currently behind the navbar and adapts its color.
-// Each section can declare data-nav-theme="dark|black|blue|green|purple"
 const header = document.querySelector('header');
 
+// Color themes: [background, border-color]
 const navThemes = {
-  // theme name → [background, border-color]
-  'black':  ['rgba(0,0,0,0.75)',        'rgba(255,255,255,0.06)'],
-  'dark':   ['rgba(10,22,40,0.92)',     'rgba(79,158,255,0.15)'],
-  'blue':   ['rgba(8,28,56,0.92)',      'rgba(79,158,255,0.3)'],
-  'green':  ['rgba(5,30,22,0.92)',      'rgba(52,211,153,0.25)'],
-  'purple': ['rgba(18,10,40,0.92)',     'rgba(167,139,250,0.25)'],
-  'orange': ['rgba(30,20,5,0.92)',      'rgba(251,191,36,0.2)'],
+  'black':  ['rgba(0,0,0,0.82)',    'rgba(255,255,255,0.08)'],
+  'dark':   ['rgba(10,22,40,0.95)', 'rgba(79,158,255,0.18)'],
+  'blue':   ['rgba(8,24,52,0.95)',  'rgba(79,158,255,0.3)'],
+  'green':  ['rgba(5,28,20,0.95)',  'rgba(52,211,153,0.28)'],
+  'purple': ['rgba(16,8,38,0.95)', 'rgba(167,139,250,0.28)'],
+  'orange': ['rgba(28,18,4,0.95)', 'rgba(251,191,36,0.22)'],
 };
 
-let currentTheme = 'dark';
+// Determine default theme for this page based on body background
+// Homepage has black hero → starts black. All other pages start dark navy.
+const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+let currentTheme = isHomePage ? 'black' : 'dark';
 
-const applyNavTheme = (theme) => {
-  if (!header || theme === currentTheme) return;
+const applyNavTheme = (theme, force) => {
+  if (!header) return;
+  if (theme === currentTheme && !force) return;
   currentTheme = theme;
   const [bg, border] = navThemes[theme] || navThemes['dark'];
   header.style.background = bg;
   header.style.borderColor = border;
 };
 
-// Use IntersectionObserver on each section — whichever is most visible sets the theme
-const sections = document.querySelectorAll('[data-nav-theme]');
+// Apply correct default immediately on load — no flash
+applyNavTheme(currentTheme, true);
 
-if (sections.length > 0) {
+// Scroll handler: always run — adds scrolled class and handles non-themed pages
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+    // On homepage, snap back to black when at top (over hero)
+    if (isHomePage) applyNavTheme('black');
+  }
+}, { passive: true });
+
+// Section observer: only runs on pages with data-nav-theme sections
+const themedSections = document.querySelectorAll('[data-nav-theme]');
+if (themedSections.length > 0) {
   const sectionObserver = new IntersectionObserver((entries) => {
-    // Find the section with the highest intersection ratio that's currently crossing the nav area
-    let best = null;
-    let bestRatio = 0;
     entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
-        bestRatio = entry.intersectionRatio;
-        best = entry.target;
+      if (entry.isIntersecting) {
+        applyNavTheme(entry.target.dataset.navTheme);
       }
     });
-    if (best) {
-      applyNavTheme(best.dataset.navTheme);
-    }
   }, {
-    // rootMargin: watch a thin band at the top of the viewport where the navbar lives
-    rootMargin: '-0px 0px -85% 0px',
-    threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0]
+    // Watch a band at top 15% of viewport — where navbar sits
+    rootMargin: '0px 0px -85% 0px',
+    threshold: 0.01
   });
-
-  sections.forEach(s => sectionObserver.observe(s));
-} else {
-  // Fallback: simple scroll-based for pages without data-nav-theme sections
-  const onScroll = () => {
-    if (window.scrollY > 80) {
-      applyNavTheme('dark');
-      header.classList.add('scrolled');
-    } else {
-      applyNavTheme('black');
-      header.classList.remove('scrolled');
-    }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  themedSections.forEach(s => sectionObserver.observe(s));
 }
 
 // ── MOBILE MENU ──
