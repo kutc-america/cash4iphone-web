@@ -10,14 +10,69 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 revealEls.forEach(el => observer.observe(el));
 
-// ── NAVBAR SCROLL GLASS ──
+// ── NAVBAR ADAPTIVE COLOR ──
+// Detects which section is currently behind the navbar and adapts its color.
+// Each section can declare data-nav-theme="dark|black|blue|green|purple"
 const header = document.querySelector('header');
-const onScroll = () => {
-  if (window.scrollY > 30) header.classList.add('scrolled');
-  else header.classList.remove('scrolled');
+
+const navThemes = {
+  // theme name → [background, border-color]
+  'black':  ['rgba(0,0,0,0.75)',        'rgba(255,255,255,0.06)'],
+  'dark':   ['rgba(10,22,40,0.92)',     'rgba(79,158,255,0.15)'],
+  'blue':   ['rgba(8,28,56,0.92)',      'rgba(79,158,255,0.3)'],
+  'green':  ['rgba(5,30,22,0.92)',      'rgba(52,211,153,0.25)'],
+  'purple': ['rgba(18,10,40,0.92)',     'rgba(167,139,250,0.25)'],
+  'orange': ['rgba(30,20,5,0.92)',      'rgba(251,191,36,0.2)'],
 };
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+
+let currentTheme = 'dark';
+
+const applyNavTheme = (theme) => {
+  if (!header || theme === currentTheme) return;
+  currentTheme = theme;
+  const [bg, border] = navThemes[theme] || navThemes['dark'];
+  header.style.background = bg;
+  header.style.borderColor = border;
+};
+
+// Use IntersectionObserver on each section — whichever is most visible sets the theme
+const sections = document.querySelectorAll('[data-nav-theme]');
+
+if (sections.length > 0) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    // Find the section with the highest intersection ratio that's currently crossing the nav area
+    let best = null;
+    let bestRatio = 0;
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
+        bestRatio = entry.intersectionRatio;
+        best = entry.target;
+      }
+    });
+    if (best) {
+      applyNavTheme(best.dataset.navTheme);
+    }
+  }, {
+    // rootMargin: watch a thin band at the top of the viewport where the navbar lives
+    rootMargin: '-0px 0px -85% 0px',
+    threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0]
+  });
+
+  sections.forEach(s => sectionObserver.observe(s));
+} else {
+  // Fallback: simple scroll-based for pages without data-nav-theme sections
+  const onScroll = () => {
+    if (window.scrollY > 80) {
+      applyNavTheme('dark');
+      header.classList.add('scrolled');
+    } else {
+      applyNavTheme('black');
+      header.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
 
 // ── MOBILE MENU ──
 const hamburger = document.querySelector('.hamburger');
