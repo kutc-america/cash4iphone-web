@@ -266,15 +266,25 @@
   <meta name="theme-color" content="#000000"/>
   <style>
     /* Logo image replaces old C4i text mark */
-    .logo-img {
-      height: 36px;
-      width: auto;
-      display: block;
+    /* ── Navbar logo ── */
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      height: 42px;
+      width: 42px;
+      border-radius: 10px;
       object-fit: contain;
+      flex-shrink: 0;
     }
-    /* Remove old logo-mark/logo-text styling conflicts */
-    header .logo, footer .logo { gap: 0; }
-    @media (max-width: 768px) { .logo-img { height: 28px; } }
+    .logo-wordmark {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .logo-icon    { height: 34px; width: 34px; }
+      .logo-wordmark { height: 24px; }
+    } }
   </style>
 </head>
 
@@ -282,7 +292,8 @@
 
 <header>
   <a href="/" class="logo">
-    <img src="assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-img"/>
+    <img src="assets/images/c4isquarelogo.png" alt="C4i" class="logo-icon"/>
+    <img src="assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-wordmark"/>
   </a>
   <nav>
     <a href="/">Home</a>
