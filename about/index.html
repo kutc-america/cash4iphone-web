@@ -17,20 +17,33 @@
   <meta name="msapplication-TileColor" content="#0a1628"/>
   <meta name="theme-color" content="#000000"/>
   <style>
-    .logo-img {
-      height: 36px;
-      width: auto;
-      display: block;
+    /* ── Navbar logo ── */
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      height: 42px;
+      width: 42px;
+      border-radius: 10px;
       object-fit: contain;
+      flex-shrink: 0;
     }
-    header .logo, footer .logo { gap: 0; }
-    @media (max-width: 768px) { .logo-img { height: 28px; } }
+    .logo-wordmark {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .logo-icon    { height: 34px; width: 34px; }
+      .logo-wordmark { height: 24px; }
+    } }
   </style>
 </head>
 <body>
 <header>
   <a href="/" class="logo">
-    <img src="/assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-img"/></a>
+    <img src="/assets/images/c4isquarelogo.png" alt="C4i" class="logo-icon"/>
+    <img src="/assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-wordmark"/>
+  </a>
   <nav>
     <a href="/">Home</a><a href="/about/">About</a><a href="/products/">Products</a><a href="#faq">FAQ</a><a href="/contact-us/" class="cta-nav">Contact Us</a>
   </nav>
