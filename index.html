@@ -1,4 +1,3 @@
-<!--test-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +8,8 @@
   <meta name="keywords" content="cash for iPhone Queens NY, sell iPhone for cash New York, cash4phone Queens, cash for iphone NYC, iPhone buyer Queens NY, sell used iPhone NYC, locked iPhone buyer Queens, carrier locked iPhone buyer New York, sell iPhone same day cash Queens, cash4iphone, buy my iPhone Queens NY, sell iPhone Sunnyside Queens, cash for phones NYC, iPhone cash buyer near me New York"/>
   <link rel="canonical" href="https://cash4iphone.net/"/>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Cash4iPhone — Sell Your iPhone for Cash | Queens &amp; NYC"/>
-  <meta property="og:description" content="Cash4iPhone — Queens #1 cash for iPhone buyer. We pay instant cash for used, locked &amp; carrier-locked iPhones in Sunnyside, Woodside &amp; all of NYC. Best price. We come to you."/>
+  <meta property="og:title" content="Cash4iPhone — Sell Your iPhone for Cash | Queens & NYC"/>
+  <meta property="og:description" content="Cash4iPhone — Queens #1 cash for iPhone buyer. We pay instant cash for used, locked & carrier-locked iPhones in Sunnyside, Woodside & all of NYC. Best price. We come to you."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://cash4iphone.net/"/>
   <meta property="og:locale" content="en_US"/>
@@ -24,9 +22,8 @@
     "@type": "LocalBusiness",
     "name": "Cash4iPhone",
     "alternateName": "Cash 4 iPhone",
-    "description": "Cash4iPhone is Queens' #1 cash for iPhone buyer. We pay instant cash for used iPhones, locked iPhones, and carrier-locked iPhones in Sunnyside, Woodside, and all of New York City. Get cash for your iPhone today — fast, safe, in-person transactions.",
+    "description": "Cash4iPhone is Queens' #1 cash for iPhone buyer. We pay instant cash for used iPhones, locked iPhones, and carrier-locked iPhones in Sunnyside, Woodside, and all of New York City.",
     "url": "https://cash4iphone.net",
-    "image": "https://cash4iphone.net/og-image.png",
     "telephone": "+19173103999",
     "address": {
       "@type": "PostalAddress",
@@ -36,11 +33,7 @@
       "postalCode": "11377",
       "addressCountry": "US"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "40.7448",
-      "longitude": "-73.9027"
-    },
+    "geo": { "@type": "GeoCoordinates", "latitude": "40.7448", "longitude": "-73.9027" },
     "areaServed": [
       {"@type": "City", "name": "New York"},
       {"@type": "Neighborhood", "name": "Queens"},
@@ -54,32 +47,25 @@
       "closes": "20:00"
     },
     "priceRange": "$$",
-    "sameAs": ["https://wa.me/19173103999", "https://cash4iphone.net"],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Cash for iPhones Services",
-      "itemListElement": [
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Buy Used iPhones in Queens NY"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Buy Carrier Locked iPhones Queens"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Buy Locked iPhones New York"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cash for iPhones in Sunnyside Queens"}}
-      ]
-    }
+    "sameAs": ["https://wa.me/19173103999"]
   }
   </script>
 
+  <link rel="icon" href="/favicon.ico" sizes="48x48"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <meta name="theme-color" content="#000000"/>
   <link rel="stylesheet" href="style.css"/>
 
   <style>
-    /* ══ APPLE-STYLE HERO ══ */
     main { padding-top: 0; }
-
     header {
       background: rgba(0,0,0,0.72);
       border-color: rgba(255,255,255,0.08);
       transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease;
     }
-
     .hero-apple {
       width: 100%;
       background: #000;
@@ -87,12 +73,9 @@
       flex-direction: column;
       align-items: center;
       overflow: hidden;
-      /* Fade bottom into site bg */
       -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     }
-
-    /* ── Text block — top, centered ── */
     .hero-apple-text {
       position: relative;
       z-index: 2;
@@ -103,13 +86,12 @@
       align-items: center;
       width: 100%;
     }
-
     .hero-apple-eyebrow {
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.5);
       margin-bottom: 14px;
       display: flex;
       align-items: center;
@@ -118,13 +100,11 @@
     .hero-apple-eyebrow .dot {
       width: 7px; height: 7px;
       border-radius: 50%;
-      /* Default green (open) — JS overrides to red when closed */
       background: var(--green);
       animation: pulse-g 2s infinite;
       flex-shrink: 0;
       transition: background 0.3s;
     }
-
     .hero-apple-headline {
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
@@ -134,16 +114,14 @@
       color: #fff;
       margin-bottom: 12px;
     }
-
     .hero-apple-sub {
       font-family: 'Outfit', sans-serif;
       font-weight: 500;
       font-size: clamp(1rem, 1.8vw, 1.3rem);
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.52);
       margin-bottom: 28px;
       line-height: 1.5;
     }
-
     .hero-apple-cta {
       display: flex;
       align-items: center;
@@ -151,7 +129,6 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-
     .btn-apple-primary {
       background: var(--grad-blue);
       color: #fff;
@@ -164,7 +141,6 @@
       box-shadow: 0 6px 20px rgba(59,130,246,0.4);
     }
     .btn-apple-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(59,130,246,0.55); }
-
     .btn-apple-ghost {
       background: rgba(255,255,255,0.09);
       color: #fff;
@@ -175,14 +151,8 @@
       text-decoration: none;
       border: 1.5px solid rgba(255,255,255,0.2);
       transition: all 0.28s;
-      backdrop-filter: blur(8px);
     }
     .btn-apple-ghost:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
-
-    /* ── Phone image ──
-       Scale image to 200% width so phones fill the viewport.
-       left: -50% re-centers it (image center = screen center).
-       position absolute + bottom:0 hides the black top padding. */
     .hero-apple-phones {
       width: 100%;
       height: 65vh;
@@ -193,7 +163,6 @@
       margin-top: -24px;
       flex-shrink: 0;
     }
-
     .hero-apple-phones img {
       display: block;
       width: 200%;
@@ -203,95 +172,89 @@
       left: -50%;
     }
 
-    /* Mobile — scale even more since viewport is narrower */
+    /* What we buy */
+    .buy-section { padding: 80px 0; }
+    .buy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px 80px;
+      margin-top: 48px;
+    }
+    .buy-item h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .buy-item p { font-size: 15px; color: var(--text-muted); line-height: 1.75; }
+    .buy-item-img {
+      width: 100%;
+      max-width: 180px;
+      height: 140px;
+      object-fit: contain;
+      display: block;
+      margin-bottom: 20px;
+      -webkit-mask-image: radial-gradient(ellipse at center, black 55%, transparent 90%);
+      mask-image: radial-gradient(ellipse at center, black 55%, transparent 90%);
+    }
+
+    /* How it works */
+    .steps-section { padding: 0 0 80px; }
+    .steps-list { margin-top: 40px; display: flex; flex-direction: column; }
+    .step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .step-body h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .step-body p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+
+    /* Logo */
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { height: 42px; width: 42px; border-radius: 10px; object-fit: contain; flex-shrink: 0; }
+    .logo-wordmark { height: 32px; width: auto; object-fit: contain; display: block; }
+    .logo-img { height: 32px; width: auto; object-fit: contain; display: block; }
+
     @media (max-width: 768px) {
       .hero-apple-phones { height: 55vh; min-height: 320px; }
       .hero-apple-phones img { width: 320%; left: -110%; }
-    }
-    @media (max-width: 480px) {
-      .hero-apple-phones { height: 50vh; min-height: 280px; }
-      .hero-apple-phones img { width: 380%; left: -140%; }
-    }
-
-    /* ── Trust pills ── */
-    .hero-pills {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      padding: 16px 20px 48px;
-      width: 100%;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 16px;
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.04em;
-      backdrop-filter: blur(12px);
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 768px) {
       .hero-apple-text { padding-top: calc(var(--nav-h) + 36px); padding-bottom: 12px; }
       .hero-apple-headline { font-size: clamp(2rem, 9vw, 2.8rem); }
       .hero-apple-sub { font-size: 1rem; margin-bottom: 16px; }
       .btn-apple-primary, .btn-apple-ghost { font-size: 14px; padding: 11px 22px; }
-      .hero-pills { padding: 12px 16px 36px; gap: 8px; }
-      .hero-pill { font-size: 11px; padding: 6px 12px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-apple-cta { flex-direction: column; align-items: stretch; max-width: 220px; }
-      .btn-apple-primary, .btn-apple-ghost { text-align: center; justify-content: center; }
-    }
-  </style>
-    <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" sizes="48x48"/>
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-  <link rel="manifest" href="/site.webmanifest"/>
-  <meta name="msapplication-TileColor" content="#0a1628"/>
-  <meta name="theme-color" content="#000000"/>
-  <style>
-    /* Logo image replaces old C4i text mark */
-    /* ── Navbar logo ── */
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon {
-      height: 42px;
-      width: 42px;
-      border-radius: 10px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-    .logo-wordmark {
-      height: 32px;
-      width: auto;
-      object-fit: contain;
-      display: block;
-    }
-    /* Footer logo — constrain the wordmark-only img in footer */
-    .logo-img { height: 32px; width: auto; object-fit: contain; display: block; }
-    @media (max-width: 768px) {
-      .logo-icon    { height: 34px; width: 34px; }
+      .buy-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .logo-icon { height: 34px; width: 34px; }
       .logo-wordmark { height: 24px; }
       .logo-img { height: 26px; }
-    } }
+    }
+    @media (max-width: 480px) {
+      .hero-apple-phones { height: 50vh; min-height: 280px; }
+      .hero-apple-phones img { width: 380%; left: -140%; }
+      .hero-apple-cta { flex-direction: column; align-items: stretch; max-width: 220px; }
+      .btn-apple-primary, .btn-apple-ghost { text-align: center; justify-content: center; }
+      .buy-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
   </style>
 </head>
-
-  <body>
+<body>
 
 <header>
   <a href="/" class="logo">
@@ -317,243 +280,150 @@
 
 <main>
 
-<!-- ══ APPLE-STYLE HERO ══ -->
 <section class="hero-apple" data-nav-theme="black">
-
-  <!-- Text on top, centered -->
   <div class="hero-apple-text reveal">
     <div class="hero-apple-eyebrow">
       <span class="dot"></span>
       <span id="hero-badge-text">Queens, NY · Open Now</span>
     </div>
     <h1 class="hero-apple-headline">#1 iPhone Buyer<br>in Queens, NY</h1>
-    <p class="hero-apple-sub">Sell Your iPhone for Cash — Best Price Guaranteed</p>
+    <p class="hero-apple-sub">Cash on the spot — used, locked, or carrier-locked.</p>
     <div class="hero-apple-cta">
       <a href="/contact-us/" class="btn-apple-primary">Get a Cash Offer</a>
       <a href="http://wa.me/19173103999" target="_blank" rel="noopener" class="btn-apple-ghost">WhatsApp Us</a>
     </div>
   </div>
-
-  <!-- Phones image below, full width -->
   <div class="hero-apple-phones reveal reveal-delay-1">
-    <img
-      src="assets/images/iphoneblackbackground_largetallx2.jpg"
-      alt="Sell your iPhone for cash — Cash4iPhone Queens NY"
-      loading="eager"
-    />
-  </div>
-
-  <!-- Trust pills -->
-  <div class="hero-pills reveal reveal-delay-2">
-    <span class="hero-pill">💵 Cash on the spot</span>
-    <span class="hero-pill">🔒 Locked iPhones welcome</span>
-    <span class="hero-pill">📍 We come to you</span>
-    <span class="hero-pill">⚡ No waiting</span>
-  </div>
-
-</section>
-
-<section class="featured-section" data-nav-theme="dark">
-  <div class="section-inner">
-    <div class="featured-header">
-      <div class="section-label label-blue reveal">Our Products</div>
-      <h2 class="section-title reveal reveal-delay-1">Apple devices we <em>buy from you</em></h2>
-    </div>
-
-    <div class="product-spotlight">
-      <div class="product-spotlight-card iphone-card reveal">
-        <img src="https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-17-pro-max-colors.png" alt="iPhones"/>
-        <div class="product-card-content">
-          <a href="/contact-us/" class="product-card-tag">Sell to Us →</a>
-          <div class="product-card-title">iPhones</div>
-          <div class="product-card-sub">iPhone 13 through iPhone 17 Pro Max</div>
-        </div>
-      </div>
-      <div class="product-spotlight-card macbook-card reveal reveal-delay-1">
-        <img src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/macbook-pro-16-inch-m5-pro-m5-max.png" alt="MacBooks"/>
-        <div class="product-card-content">
-          <a href="/contact-us/" class="product-card-tag">Sell to Us →</a>
-          <div class="product-card-title">MacBooks</div>
-          <div class="product-card-sub">MacBook Air &amp; Pro — all M-chips</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-row-3">
-      <div class="product-small-card ipad-card reveal">
-        <img src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/ipad-pro-13-inch-m5.png" alt="iPads"/>
-        <div>
-          <h3>iPads</h3>
-          <p>iPad Standard, Air, & Pro. Multiple storage options & generations.</p>
-          <a href="/contact-us/" class="product-card-tag">Sell to Us →</a>
-        </div>
-      </div>
-      
-      <div class="product-small-card watch-card reveal reveal-delay-1">
-        <img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MGCC4_VW_34FR+watch-case-49-titanium-natural-ultra3_VW_34FR+watch-face-49-ocean-ultra3_VW_34FR_GEO_US?wid=2000&hei=2000&fmt=png-alpha&.v=T1lWTTZnNjJ0cHU5TWZLUktueGVoS1ZGV0ZiSDllNHd6YWJwdVV2Z2xBWm9SMGMvQkpTNDBiSVZSVExOcXdwL21waDNwS2JiYllsTkdSSzZVQyt6UTA3TEpxSjk0aTYwUmxLdzg5clk4Qk0xWnhmaFhNViswRU85Z2dveDI0TExsWGFaeFZLT3IrUlQwMmJtYTZQYUpWWG5DL3A4d3pIcTE0S1ZGY25HVUpJdzMra0RNOWpWVEo0LzNSNEhWSnJNdWJRSFluU2pjOGxrdE00bG9EMDlRUQ" alt="Apple Watch"/>
-        <div>
-          <h3>Apple Watches</h3>
-          <p>Series 9 through Ultra 3. GPS & cellular. Sell yours to us for instant cash.</p>
-          <a href="/contact-us/" class="product-card-tag">Sell to Us →</a>
-        </div>
-      </div>
-
-      <div class="product-small-card airpods-card reveal reveal-delay-2">
-        <img src="https://huskertech.unl.edu/sites/unl.edu.information-services.huskertech/files/styles/no_crop_720/public/media/image/AirPodslineup.png?itok=e4IL3Dv8" alt="AirPods"/>
-        <div>
-          <h3>AirPods</h3>
-          <p>AirPods Pro 3, AirPods Max, & more. Certified genuine & tested.</p>
-        </div>
-      </div>
-
-      <div class="product-small-card other-electronics-card reveal reveal-delay-3">
-        <img src="https://pics.clipartpng.com/midle/Cardboard_Box_PNG_Clip_Art_Image-2761.png" alt="Other Electronics"/>
-        <div>
-          <h3>Other Electronics</h3>
-          <p>Gaming consoles, cameras, & unwanted tech. We turn your gear into cash.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-center reveal">
-      <a href="/products/" class="btn btn-outline">See All Products</a>
-    </div>
+    <img src="assets/images/iphoneblackbackground_largetallx2.jpg" alt="Sell your iPhone for cash — Cash4iPhone Queens NY" loading="eager"/>
   </div>
 </section>
 
-<section class="services-section" data-nav-theme="dark">
+<!-- What we buy -->
+<section class="buy-section" data-nav-theme="dark">
   <div class="section-inner">
-      <div class="services-header">
-      <div>
-        <div class="section-label label-purple reveal">What We Do</div>
-        <h2 class="section-title reveal reveal-delay-1">Sell Your iPhone in Queens.<br><em>We Pay the Best.</em></h2>
+    <h2 class="section-title reveal">We buy <em>all of it.</em></h2>
+    <p class="section-subtitle reveal reveal-delay-1">iPhone 13 to 17 Pro Max. Locked, unlocked, cracked, carrier-locked — bring it. We also buy MacBooks, iPads, Apple Watches and AirPods.</p>
+    <div class="buy-grid">
+      <div class="buy-item reveal">
+        <img class="buy-item-img" src="https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-17-pro-max-colors.png" alt="iPhones"/>
+        <h3>iPhones</h3>
+        <p>iPhone 13 through 17 Pro Max. Any condition — cracked screen, dead battery, locked to a carrier. We pay cash for all of it.</p>
+        <a href="/contact-us/" class="btn btn-outline" style="margin-top:16px; display:inline-flex;">Get a quote →</a>
       </div>
-      <p class="section-subtitle reveal">Whether you want to sell a used iPhone, a carrier-locked iPhone, or even a locked iPhone — Cash4iPhone in Sunnyside Queens gives you the best price in New York. Walk in or message us on WhatsApp.</p>
-    </div>
-    <div class="services-grid">
-      <div class="card service-card reveal">
-        <div class="service-icon icon-blue">📲</div>
-        <h3>We Pay Cash for Your iPhone</h3>
-        <p><strong>Cash for iPhones</strong> in Queens and New York — we pay on the spot. Used, new, locked, or unlocked — we buy them all and pay cash immediately. Serving Sunnyside, Woodside, and all of NYC.</p>
+      <div class="buy-item reveal reveal-delay-1">
+        <img class="buy-item-img" src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/macbook-pro-16-inch-m5-pro-m5-max.png" alt="MacBooks"/>
+        <h3>MacBooks</h3>
+        <p>MacBook Air and Pro on M1 through M5. We pay well for recent chips. Older models too — ask us.</p>
+        <a href="/contact-us/" class="btn btn-outline" style="margin-top:16px; display:inline-flex;">Get a quote →</a>
       </div>
-      <div class="card service-card reveal reveal-delay-1">
-        <div class="service-icon icon-purple">🔒</div>
-        <h3>Carrier & Locked iPhones</h3>
-        <p>Have a carrier-locked or locked iPhone? We still buy it. Bring it to our Queens location or contact us via WhatsApp for an instant quote.</p>
+      <div class="buy-item reveal">
+        <img class="buy-item-img" src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/ipad-pro-13-inch-m5.png" alt="iPads"/>
+        <h3>iPads</h3>
+        <p>iPad, Air, and Pro — any generation. WiFi or cellular. We pay on condition and storage.</p>
+        <a href="/contact-us/" class="btn btn-outline" style="margin-top:16px; display:inline-flex;">Get a quote →</a>
+      </div>
+      <div class="buy-item reveal reveal-delay-1">
+        <img class="buy-item-img" src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MGCC4_VW_34FR+watch-case-49-titanium-natural-ultra3_VW_34FR+watch-face-49-ocean-ultra3_VW_34FR_GEO_US?wid=2000&hei=2000&fmt=png-alpha&.v=T1lWTTZnNjJ0cHU5TWZLUktueGVoS1ZGV0ZiSDllNHd6YWJwdVV2Z2xBWm9SMGMvQkpTNDBiSVZSVExOcXdwL21waDNwS2JiYllsTkdSSzZVQyt6UTA3TEpxSjk0aTYwUmxLdzg5clk4Qk0xWnhmaFhNViswRU85Z2dveDI0TExsWGFaeFZLT3IrUlQwMmJtYTZQYUpWWG5DL3A4d3pIcTE0S1ZGY25HVUpJdzMra0RNOWpWVEo0LzNSNEhWSnJNdWJRSFluU2pjOGxrdE00bG9EMDlRUQ" alt="Apple Watch"/>
+        <h3>Apple Watches & AirPods</h3>
+        <p>Series 9 through Ultra 3. AirPods Pro and Max. If it's Apple and it works, we want it.</p>
+        <a href="/contact-us/" class="btn btn-outline" style="margin-top:16px; display:inline-flex;">Get a quote →</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- How it works -->
+<section class="steps-section" data-nav-theme="dark">
   <div class="section-inner">
-  <div class="cta-banner reveal">
-    <h2 class="display-title">Wanted: <em>Your iPhone.</em></h2>
-    <p class="section-subtitle">We are the #1 iPhone buyer in Queens, NY. Sell your iPhone today — used, carrier-locked, or locked. Meet us in Sunnyside / Woodside Queens, or we come to you — WhatsApp us now.</p>
-    <div class="cta-actions">
-      <a href="/contact-us/" class="btn btn-white">Contact Us</a>
-      <a href="http://wa.me/19173103999" target="_blank" rel="noopener" class="btn btn-green">WhatsApp Us</a>
+    <div style="max-width: 560px;">
+      <h2 class="section-title reveal">How it works.</h2>
+      <p class="section-subtitle reveal reveal-delay-1" style="margin-bottom: 0;">No store. No shipping. No appointment. We meet you.</p>
+    </div>
+    <div class="steps-list">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>Message us</h3>
+          <p>WhatsApp us or fill out the contact form. Tell us what you have — model, storage, condition. We'll come back with a number, usually within the hour.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>Pick a spot in Queens or NYC</h3>
+          <p>Bank lobby, McDonald's, Starbucks, outside your building — wherever works for you. We come to you.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>Get paid cash, right there</h3>
+          <p>We check the device, hand you the money, done. The whole thing takes a few minutes. No transfers, no waiting, no checks.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 40px;" class="reveal">
+      <a href="/contact-us/" class="btn btn-primary">Start a Quote</a>
     </div>
   </div>
-</div>
+</section>
 
-<!-- SEO Text Block -->
-<div class="section-inner">
+<!-- FAQ -->
+<div class="section-inner" style="padding-bottom: 80px;">
   <div class="text-block">
-
-  <!-- How We Meet Section -->
-  <div class="section-gap">
-    <div class="section-label label-green reveal">How It Works</div>
-    <h2 class="section-title reveal reveal-delay-1">No store. No shipping.<br><em>We meet you.</em></h2>
-    <p class="section-subtitle reveal reveal-delay-2">We keep it simple and safe. Pick a spot that works for you — we come to you anywhere in Queens or New York.</p>
-    <div class="services-grid-simple">
-      <div class="card service-card reveal">
-        <div class="service-icon icon-blue">💬</div>
-        <h3>1. Contact Us</h3>
-        <p>Contact us through our form, or send us a message on WhatsApp with your iPhone model and condition. We reply fast with a cash offer for your device.</p>
-        <a href="/contact-us/" class="btn btn-primary">Contact Us</a>
-      </div>
-      <div class="card service-card reveal reveal-delay-1">
-        <div class="service-icon icon-purple">📍</div>
-        <h3>2. Pick a Spot</h3>
-        <p>Choose any public place — a bank, McDonald's, Starbucks, or we meet in Woodside / Sunnyside Queens.</p>
-      </div>
-      <div class="card service-card reveal reveal-delay-2">
-        <div class="service-icon icon-green">💵</div>
-        <h3>3. Get Paid Cash</h3>
-        <p>We meet, inspect the device, and pay you cash on the spot. Done in minutes.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- FAQ / Trust Section -->
-  <div id="faq" class="faq-section reveal">
-    <div class="section-label label-purple">FAQ</div>
-    <h2 class="section-title reveal-delay-1">Common <em>Questions</em></h2>
-    <div class="card card--soft faq-intro">
-      <div class="faq-intro-top">
-        <div class="section-label label-green">Hours</div>
-        <span>Available 7 days a week, Monday through Sunday, 10am–8pm Eastern Time.</span>
-      </div>
-      <p>We are available every day during those hours for WhatsApp messages and contact form replies.</p>
-      <p>If you reach out outside of these times, we will respond as soon as we are back online.</p>
-    </div>
-    <div class="faq-accordion">
-      <div class="faq-item open">
-        <button class="faq-question">
-          <span>Do you have a store I can visit?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="faq-answer"><p>We don't operate a traditional store — we meet you in person at a public location of your choice anywhere in Queens or New York. You can also come to us in the Woodside / Sunnyside Queens area.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>Do you buy locked, carrier-locked or financed iPhones?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="faq-answer"><p>Yes! We buy carrier-locked iPhones, locked and financed iPhones that other buyers won't touch. For financed devices — we can buy them, but paying the remaining monthly installments to the carrier remains your responsibility. Contact us via WhatsApp for a quote.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>How fast do I get paid?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="faq-answer"><p>Instantly — cash in hand the moment we meet and inspect your device. No waiting, no bank transfers, no delays.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>Where do we meet?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="faq-answer"><p>Anywhere safe and public works — a bank lobby, McDonald's, Starbucks, or any spot in Queens, Sunnyside, or New York City. We come to you.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>What price can I get for my used iPhone?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="faq-answer"><p>For used phones we give an approximate price based on model, condition, and storage. For brand new unused phones we can give you an exact price. WhatsApp us with your device details for a fast quote.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>Do I need any paperwork to sell my device?</span>
-          <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="faq-answer"><p>No paperwork or ID needed — just make sure it's your own device.</p></div>
+    <div id="faq" class="faq-section reveal" style="scroll-margin-top: calc(var(--nav-h, 72px) + 32px);">
+      <h2 class="section-title reveal-delay-1" style="margin-bottom: 32px;">Common <em>Questions</em></h2>
+      <div class="faq-accordion">
+        <div class="faq-item open">
+          <button class="faq-question">
+            <span>Do you have a store I can visit?</span>
+            <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p>No storefront. We meet you wherever is convenient — a bank lobby, a McDonald's, a café, outside your apartment. Anywhere in Queens or New York City works.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do you buy locked or carrier-locked iPhones?</span>
+            <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p>Yes. Locked, carrier-locked, financed — we buy what other places won't. For financed devices, you're still responsible for paying off the remaining balance with the carrier, but we can still buy it from you.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How fast do I get paid?</span>
+            <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p>Right when we meet. Cash in hand after we check the device. No bank transfers, no waiting period.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do you price used iPhones?</span>
+            <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p>Based on model, storage size, and condition. For used phones we give an estimate upfront — exact price confirmed when we see the device. Brand new sealed phones get an exact quote immediately. Send us a WhatsApp with the details.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do I need ID or paperwork?</span>
+            <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p>No paperwork, no ID. Just make sure the device is yours to sell.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What are your hours?</span>
+            <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p>Monday through Sunday, 10am to 8pm Eastern. Message us outside those hours and we'll get back to you when we're back online.</p></div>
+        </div>
       </div>
     </div>
-  </div>
 
-
-    <h2 class="section-title">Sell Your iPhone in <em>Queens, New York</em></h2>
-    <p>
-      Are you searching for an <strong>iPhone buyer in New York</strong>? Look no further. Cash4iPhone is Queens' most trusted buyer of new and used iPhones. Whether you're in <strong>Sunnyside Queens</strong>, Woodside, Jackson Heights, or anywhere in New York City, we offer the <strong>best price for your iPhone</strong>.
-    </p>
-    <p>
-      We buy all iPhone models — from iPhone 13 all the way to the iPhone 17 Pro Max. We also purchase <strong>carrier-locked iPhones in Queens</strong> and <strong>locked iPhones</strong> that other buyers won't touch. Don't throw away a locked iPhone — bring it to us and get cash on the spot. <strong>Wondering where to sell a new or used iPhone for cash in Queens, New York?</strong> Cash4iPhone is your answer — <strong>we pay cash for iPhones</strong> immediately, in person. Known as the go-to <strong>cash iPhone buyer in NYC</strong>, we make selling your iPhone fast and easy.
-    </p>
-    <p>
-      Meet us in Woodside / Sunnyside Queens, or we come to you at a public location of your choice — a bank, McDonald's, or anywhere nearby. Contact us via WhatsApp at +1 (917) 310-3999 for an instant cash offer.
-    </p>
+    <div style="padding-top: 60px; border-top: 1px solid var(--border); margin-top: 20px;">
+      <h2 class="section-title">Sell your iPhone in Queens, New York</h2>
+      <p>Cash4iPhone is a Queens-based iPhone buyer serving Sunnyside, Woodside, Jackson Heights, and all of New York City. We buy used iPhones, carrier-locked iPhones, and locked iPhones — models iPhone 13 through 17 Pro Max. We meet you in person at any public location you choose and pay cash on the spot.</p>
+      <p>If you've been searching for where to sell your iPhone for cash in Queens or New York, reach out via WhatsApp at +1 (917) 310-3999 or use the contact form.</p>
+    </div>
   </div>
 </div>
 
@@ -567,9 +437,12 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand"><a href="/" class="logo"><img src="assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-img"/></a><p>Queens' #1 iPhone buyer. We buy used iPhones, carrier-locked iPhones, and locked iPhones in Sunnyside, Woodside &amp; all of New York.</p></div>
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="assets/images/c4i_logo_white.png" alt="Cash4iPhone" class="logo-img"/></a>
+        <p>Queens' #1 iPhone buyer. We buy used iPhones, carrier-locked iPhones, and locked iPhones in Sunnyside, Woodside & all of New York.</p>
+      </div>
       <div class="footer-col"><h4>Pages</h4><ul><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="#faq">FAQ</a></li><li><a href="/contact-us/">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Contact</h4><ul><li><a href="http://wa.me/19173103999">WhatsApp: +1 (917) 310-3999</a></li><li><a href="/contact-us/">Send a Message</a></li><li><a>Woodside / Sunnyside, Queens NY</a></li><li><a>We meet you — bank, McDonald's, anywhere</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="http://wa.me/19173103999">WhatsApp: +1 (917) 310-3999</a></li><li><a href="/contact-us/">Send a Message</a></li><li><span>Woodside / Sunnyside, Queens NY</span></li><li><span>Mon–Sun, 10am–8pm EST</span></li></ul></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Cash4iPhone</span><span>Woodside, New York · U.S.A.</span></div>
   </div>
