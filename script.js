@@ -1,140 +1,30 @@
-// ── SCROLL REVEAL ──
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in-view');
-      observer.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => observer.observe(el));
-
-// ── NAVBAR ADAPTIVE COLOR ──
-const header = document.querySelector('header');
-
-// Color themes: [background, border-color]
-const navThemes = {
-  'black':  ['rgba(0,0,0,0.82)',    'rgba(255,255,255,0.08)'],
-  'dark':   ['rgba(10,22,40,0.95)', 'rgba(79,158,255,0.18)'],
-  'blue':   ['rgba(8,24,52,0.95)',  'rgba(79,158,255,0.3)'],
-  'green':  ['rgba(5,28,20,0.95)',  'rgba(52,211,153,0.28)'],
-  'purple': ['rgba(16,8,38,0.95)', 'rgba(167,139,250,0.28)'],
-  'orange': ['rgba(28,18,4,0.95)', 'rgba(251,191,36,0.22)'],
-};
-
-// Determine default theme for this page based on body background
-// Homepage has black hero → starts black. All other pages start dark navy.
-const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
-let currentTheme = isHomePage ? 'black' : 'dark';
-
-const applyNavTheme = (theme, force) => {
-  if (!header) return;
-  if (theme === currentTheme && !force) return;
-  currentTheme = theme;
-  const [bg, border] = navThemes[theme] || navThemes['dark'];
-  header.style.background = bg;
-  header.style.borderColor = border;
-};
-
-// Apply correct default immediately on load — no flash
-applyNavTheme(currentTheme, true);
-
-// Scroll handler: always run — adds scrolled class and handles non-themed pages
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 40) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-    // On homepage, snap back to black when at top (over hero)
-    if (isHomePage) applyNavTheme('black');
-  }
-}, { passive: true });
-
-// Section observer: only runs on pages with data-nav-theme sections
-const themedSections = document.querySelectorAll('[data-nav-theme]');
-if (themedSections.length > 0) {
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        applyNavTheme(entry.target.dataset.navTheme);
-      }
-    });
-  }, {
-    // Watch a band at top 15% of viewport — where navbar sits
-    rootMargin: '0px 0px -85% 0px',
-    threshold: 0.01
-  });
-  themedSections.forEach(s => sectionObserver.observe(s));
-}
-
-// ── MOBILE MENU ──
+// Navigation: preserve URLs, expose state and support keyboard dismissal.
 const hamburger = document.querySelector('.hamburger');
 const mobileMenu = document.querySelector('.mobile-menu');
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    });
-  });
-}
-
-// ── ACTIVE NAV LINK ──
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('nav a, .mobile-menu a').forEach(a => {
-  const href = a.getAttribute('href');
-  if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-    if (!a.classList.contains('cta-nav')) a.classList.add('active');
+const setMenuOpen = open => {
+  hamburger?.classList.toggle('open', open);
+  mobileMenu?.classList.toggle('open', open);
+  hamburger?.setAttribute('aria-expanded', String(open));
+  hamburger?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+};
+hamburger?.addEventListener('click', () => setMenuOpen(hamburger.getAttribute('aria-expanded') !== 'true'));
+mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false)));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && hamburger?.getAttribute('aria-expanded') === 'true') {
+    setMenuOpen(false); hamburger.focus();
   }
 });
-
-// ── OPEN/CLOSED BADGE ──
-const updateOpenBadge = () => {
-  // Supports both old (.hero-badge) and new Apple-style hero (.hero-apple-eyebrow)
-  const dot = document.querySelector('.hero-apple-eyebrow .dot, .hero-badge-dot');
-  const label = document.getElementById('hero-badge-text') || document.querySelector('.hero-badge span');
-  if (!dot && !label) return;
-
-  let estHour = new Date().getHours();
-  try {
-    const parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'America/New_York',
-      hour12: false,
-      hour: '2-digit'
-    }).formatToParts(new Date());
-    const hourPart = parts.find(part => part.type === 'hour');
-    if (hourPart) estHour = Number(hourPart.value);
-  } catch (e) {}
-
-  const isOpen = estHour >= 10 && estHour < 20;
-
-  // Update dot color
-  if (dot) {
-    dot.style.background = isOpen ? 'var(--green, #34d399)' : '#f87171';
-    dot.style.animation = isOpen ? '' : 'none';
-    dot.style.boxShadow = isOpen ? '' : 'none';
+window.matchMedia('(min-width: 769px)').addEventListener('change', e => { if (e.matches) setMenuOpen(false); });
+document.querySelectorAll('nav a, .mobile-menu a').forEach(a => {
+  const url = new URL(a.href);
+  if (url.pathname === location.pathname && !url.hash) {
+    a.classList.add('active'); a.setAttribute('aria-current', 'page');
   }
-
-  // Update text
-  if (label) {
-    label.textContent = isOpen
-      ? 'QUEENS, NY · Open Now'
-      : 'QUEENS, NY · Closed · We reply as soon as we\'re back';
-  }
-
-  // Also handle old-style badge if present
-  const oldBadge = document.querySelector('.hero-badge');
-  if (oldBadge) {
-    oldBadge.classList.toggle('open', isOpen);
-    oldBadge.classList.toggle('closed', !isOpen);
-  }
-};
-updateOpenBadge();
+});
+// Carry category/model selection into the existing quote form without changing its endpoint.
+const deviceInput = document.getElementById('device');
+const requestedDevice = new URLSearchParams(location.search).get('device');
+if (deviceInput && requestedDevice) deviceInput.value = requestedDevice.slice(0, 120);
 
 // ── IMAGE UPLOAD PREVIEW ──
 const uploadArea    = document.getElementById('upload-area');
@@ -234,6 +124,8 @@ if (contactForm && formSuccess) {
 
     const btn = contactForm.querySelector('button[type="submit"]');
     const originalText = btn.textContent;
+    const errorBox = document.getElementById('form-error');
+    errorBox.hidden = true;
     btn.disabled = true;
 
     try {
@@ -245,7 +137,8 @@ if (contactForm && formSuccess) {
         for (let i = 0; i < selectedFiles.length; i++) {
           btn.textContent = 'Uploading photo ' + (i + 1) + ' of ' + selectedFiles.length + '…';
           const url = await tryUploadToUploadcare(selectedFiles[i], PUBLIC_KEY);
-          if (url) urls.push(url);
+          if (!url) throw new Error('A photo could not be uploaded. Please retry, remove the photo, or send it through WhatsApp.');
+          urls.push(url);
         }
         if (ucHidden) ucHidden.value = urls.join(' | ');
       } else {
@@ -267,49 +160,44 @@ if (contactForm && formSuccess) {
       if (res.ok) {
         contactForm.style.display = 'none';
         formSuccess.style.display = 'block';
-        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        formSuccess.focus();
+        formSuccess.scrollIntoView({ block: 'center' });
       } else {
-        // Show Formspree's actual error so we know exactly what's wrong
-        let errMsg = 'Status ' + res.status + ': ';
-        if (json.errors && json.errors.length) {
-          errMsg += json.errors.map(function(err) { return err.field ? err.field + ' — ' + err.message : err.message; }).join('. ');
-        } else if (json.error) {
-          errMsg += json.error;
-        } else {
-          errMsg += JSON.stringify(json);
-        }
-        alert('Formspree error: ' + errMsg);
+        errorBox.textContent = 'Your message could not be sent. Please retry or contact us on WhatsApp.';
+        errorBox.hidden = false;
         btn.disabled = false;
         btn.textContent = originalText;
       }
     } catch (err) {
       console.error('Submission error:', err);
-      alert('Network error: ' + err.message);
+      errorBox.textContent = err.message.includes('photo') ? err.message : 'Your message could not be sent. Check your connection and retry, or contact us on WhatsApp.';
+      errorBox.hidden = false;
       btn.disabled = false;
       btn.textContent = originalText;
     }
   });
 }
 
-// ── FAQ ACCORDION ──
-document.querySelectorAll('.faq-item').forEach(item => {
-  const btn    = item.querySelector('.faq-question');
+// FAQ answers are visible without JavaScript; enhanced buttons expose expanded state.
+const faqItems = [...document.querySelectorAll('.faq-item')];
+function setFAQ(item, open) {
+  item.classList.toggle('open', open);
+  item.querySelector('.faq-question').setAttribute('aria-expanded', String(open));
+  item.querySelector('.faq-answer').hidden = !open;
+}
+faqItems.forEach((item, i) => {
+  const btn = item.querySelector('.faq-question');
   const answer = item.querySelector('.faq-answer');
   if (!btn || !answer) return;
-  if (item.classList.contains('open')) {
-    answer.style.maxHeight = answer.scrollHeight + 'px';
-  }
+  btn.id = 'faq-question-' + i;
+  answer.id = 'faq-answer-' + i;
+  btn.setAttribute('aria-controls', answer.id);
+  answer.setAttribute('aria-labelledby', btn.id);
+  setFAQ(item, item.classList.contains('open'));
   btn.addEventListener('click', () => {
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(el => {
-      el.classList.remove('open');
-      const a = el.querySelector('.faq-answer');
-      if (a) a.style.maxHeight = '0';
-    });
-    if (!isOpen) {
-      item.classList.add('open');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-    }
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    faqItems.forEach(other => setFAQ(other, false));
+    setFAQ(item, open);
   });
 });
 
